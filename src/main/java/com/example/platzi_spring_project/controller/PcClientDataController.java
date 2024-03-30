@@ -4,10 +4,7 @@ import com.example.platzi_spring_project.persistence.entity.PcClientDataEntity;
 import com.example.platzi_spring_project.service.PcClientDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +26,12 @@ public class PcClientDataController {
     @GetMapping(value = "/get/byId/{idRegister}")
     public ResponseEntity<PcClientDataEntity> getById(@PathVariable int idRegister) {
         return ResponseEntity.ok(this.pcClientDataService.getById(idRegister));
+    }
+
+    @PostMapping(value = "/post/save/register")
+    public ResponseEntity<PcClientDataEntity> save(
+            @RequestBody PcClientDataEntity pcClientDataEntity
+    ) {
+        return ResponseEntity.ok(this.pcClientDataService.save(pcClientDataEntity));
     }
 }

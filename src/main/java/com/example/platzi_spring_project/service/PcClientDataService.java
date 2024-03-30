@@ -23,4 +23,8 @@ public class PcClientDataService {
     public PcClientDataEntity getById(int idRegister) {
         return this.pcClientDataRepository.findById(idRegister).orElse(null);
     }
+
+    public PcClientDataEntity save(PcClientDataEntity pcClientDataEntity) {
+        return this.pcClientDataRepository.save(pcClientDataEntity);
+    }
 }
