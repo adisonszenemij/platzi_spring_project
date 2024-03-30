@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "ap_order")
 @Getter
 @Setter
+@NoArgsConstructor
 public class ApOrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
