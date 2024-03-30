@@ -2,12 +2,14 @@ package com.example.platzi_spring_project.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "ap_pizza")
 @Getter
 @Setter
+@NoArgsConstructor
 public class ApPizzaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
