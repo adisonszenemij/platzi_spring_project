@@ -1,11 +1,12 @@
 package com.example.platzi_spring_project.service;
 
-import com.example.platzi_spring_project.persistence.entity.PcClientDataEntity;
-import com.example.platzi_spring_project.persistence.repository.PcClientDataRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.example.platzi_spring_project.persistence.entity.PcClientDataEntity;
+import com.example.platzi_spring_project.persistence.repository.PcClientDataRepository;
 
 @Service
 public class PcClientDataService {
@@ -26,5 +27,9 @@ public class PcClientDataService {
 
     public PcClientDataEntity save(PcClientDataEntity pcClientDataEntity) {
         return this.pcClientDataRepository.save(pcClientDataEntity);
+    }
+
+    public boolean existsById(int idRegister) {
+        return this.pcClientDataRepository.existsById(idRegister);
     }
 }
