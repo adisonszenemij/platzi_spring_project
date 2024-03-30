@@ -2,6 +2,7 @@ package com.example.platzi_spring_project.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @Table(name = "ap_customer")
 @Getter
 @Setter
+@NoArgsConstructor
 public class ApCustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
