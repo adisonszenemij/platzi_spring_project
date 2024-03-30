@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +36,7 @@ public class PcClientDataController {
     }
 
     @PostMapping(value = "/insert/register")
-    public ResponseEntity<PcClientDataEntity> insert(
+    public ResponseEntity<PcClientDataEntity> insertRegister(
         @RequestBody PcClientDataEntity pcClientDataEntity
     ) {
         // Si el id del registro es nulo o si el registro no existe
@@ -44,23 +45,31 @@ public class PcClientDataController {
                 pcClientDataEntity.getIdRegister()
             )
         ) {
-            return ResponseEntity.ok(this.pcClientDataService.save(pcClientDataEntity));
+            return ResponseEntity.ok(
+                this.pcClientDataService.save(
+                    pcClientDataEntity
+                )
+            );
         }
         // No se procese la peticion a construir
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping(value = "/update/register")
-    public ResponseEntity<PcClientDataEntity> update(
+    @PutMapping(value = "/update/register")
+    public ResponseEntity<PcClientDataEntity> updateRegister(
         @RequestBody PcClientDataEntity pcClientDataEntity
     ) {
         // Si el id del registro no es nulo o si el registro existe
-        if (pcClientDataEntity.getIdRegister() != null ||
+        if (pcClientDataEntity.getIdRegister() != null &&
             this.pcClientDataService.existsById(
                 pcClientDataEntity.getIdRegister()
             )
         ) {
-            return ResponseEntity.ok(this.pcClientDataService.save(pcClientDataEntity));
+            return ResponseEntity.ok(
+                this.pcClientDataService.save(
+                    pcClientDataEntity
+                )
+            );
         }
         // No se procese la peticion a construir
         return ResponseEntity.badRequest().build();
