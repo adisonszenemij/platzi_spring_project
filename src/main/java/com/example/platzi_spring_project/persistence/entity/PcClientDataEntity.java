@@ -1,2 +1,4 @@
-package com.example.platzi_spring_project.persistence.entity;public class PcClientDataEntity {
+package com.example.platzi_spring_project.persistence.entity;
+
+public class PcClientDataEntity {
 }
