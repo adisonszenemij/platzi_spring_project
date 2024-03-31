@@ -33,4 +33,13 @@ public class PcClientEmailEntity extends AuditoryEntity implements Serializable 
     @OrderBy("id_register ASC")
     //@OrderBy("id_register DESC")
     private PcClientDataEntity pcClientData;
+
+    @Override
+    public String toString() {
+        return "PcClientEmailEntity{" +
+            "idRegister=" + idRegister +
+            ", cdEmail='" + cdEmail + '\'' +
+            ", pcClientData=" + pcClientData +
+            '}';
+    }
 }
