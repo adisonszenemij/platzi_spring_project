@@ -59,11 +59,15 @@ public class SecurityConfig {
             .csrf().disable()
             .cors().and()
             .authorizeHttpRequests()
+            
             //.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
-            .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN", "CUSTOMER")
-            .requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN")
-            .requestMatchers("/api/**").hasRole("ADMIN")
+            //.requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN", "CUSTOMER")
+            .requestMatchers(HttpMethod.GET, "/api/pcClientData/**").hasAnyRole("ADMIN", "CUSTOMER")
+            //.requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN")
+            .requestMatchers("/api/pcClientData/get/all").hasAnyAuthority("random_order")
+            //.requestMatchers("/api/**").hasRole("ADMIN")
             //.requestMatchers(HttpMethod.PUT).denyAll()
+            
             .anyRequest()
             .authenticated().and()
             .httpBasic();
