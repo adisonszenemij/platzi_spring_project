@@ -82,9 +82,14 @@ public class PcClientDataService {
         return response;
     }
 
-    public List<PcClientDataEntity> getToday() {
+    public List<PcClientDataEntity> getAtDateCreate() {
         LocalDateTime today = LocalDate.now().atTime(0,0);
         return this.pcClientDataRepository.findAllByAtCreatedDateAfter(today);
+    }
+
+    public List<PcClientDataEntity> getAtDateUpdate() {
+        LocalDateTime today = LocalDate.now().atTime(0,0);
+        return this.pcClientDataRepository.findAllByAtModifiedDateAfter(today);
     }
 
     public Page<PcClientDataEntity> pageAll(int page, int elements) {
