@@ -40,4 +40,18 @@ public class TgUserDataEntity extends AuditoryEntity implements Serializable {
     @OrderBy("id_register ASC")
     //@OrderBy("id_register DESC")
     private TgRoleDataEntity tgRoleData;
+
+    // Many: TgUserData - One: TgUserState
+    //@ManyToOne(fecth = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(
+        name = "tg_user_state",
+        referencedColumnName = "id_register",
+        insertable = false,
+        updatable = false
+    )
+    //@JsonIgnore
+    @OrderBy("id_register ASC")
+    //@OrderBy("id_register DESC")
+    private TgUserStateEntity tgUserState;
 }
