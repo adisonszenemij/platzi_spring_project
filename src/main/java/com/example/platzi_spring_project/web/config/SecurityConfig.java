@@ -71,7 +71,7 @@ public class SecurityConfig {
         return httpSecurity.build();
     }
 
-    @Bean
+    /*@Bean
     public UserDetailsService memoryUsers() {
         UserDetails root = User.builder()
             .username("root")
@@ -86,7 +86,7 @@ public class SecurityConfig {
                 .build();
 
         return new InMemoryUserDetailsManager(root, customer);
-    }
+    }*/
 
     @Bean
     public PasswordEncoder passwordEncoder() {
