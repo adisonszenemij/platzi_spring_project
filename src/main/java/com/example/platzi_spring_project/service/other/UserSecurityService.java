@@ -1,6 +1,9 @@
 package com.example.platzi_spring_project.service.other;
 
 import com.example.platzi_spring_project.persistence.entity.TgUserDataEntity;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,17 +23,22 @@ public class UserSecurityService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        TgUserDataEntity tgUserDataEntity = this.tgUserDataRepository.findById(username).orElseThrow(
-            () -> new UsernameNotFoundException("User " + username + " not found.")
+    public UserDetails loadUserByUsername(String cdLogin) throws UsernameNotFoundException {
+        TgUserDataEntity entityTgUserData = this.tgUserDataRepository.findFirstByCdLogin(cdLogin);
+        if (entityTgUserData == null) { throw new UsernameNotFoundException("User " + cdLogin + " not found."); }
+
+        Integer idRegister = entityTgUserData.getIdRegister();
+
+        TgUserDataEntity tgUserDataEntity = this.tgUserDataRepository.findById(idRegister).orElseThrow(
+            () -> new UsernameNotFoundException("User " + cdLogin + " not found.")
         );
 
         return User.builder()
             .username(tgUserDataEntity.getCdLogin())
             .password(tgUserDataEntity.getCdPassword())
             .roles("ADMIN")
-            .accountLocked(true)
-            .disabled(true)
+            .accountLocked(false)
+            .disabled(false)
             .build();
     }
 }
