@@ -101,7 +101,7 @@ public class PcClientEmailService {
         return this.pcClientEmailConjunct.findIdRegister(idRegister);
     }
 
-    public PcClientEmailEntity queryCdData(String cdData) {
+    public List<PcClientEmailEntity> queryCdData(String cdData) {
         return this.pcClientEmailQuery.findByCdData(cdData);
     }
 

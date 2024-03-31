@@ -35,16 +35,19 @@ public class PcClientDataController {
         this.pcClientDataService = pcClientDataService;
     }
 
+    // Obtener todos los registros
     @GetMapping(value = "/get/all")
     public ResponseEntity<List<PcClientDataEntity>> getAll() {
         return ResponseEntity.ok(this.pcClientDataService.getAll());
     }
 
+    // Path Variable - Obtener un registro especifico
     @GetMapping(value = "/get/byId/{idRegister}")
     public ResponseEntity<PcClientDataEntity> getById(@PathVariable int idRegister) {
         return ResponseEntity.ok(this.pcClientDataService.getById(idRegister));
     }
 
+    // Path Varabile - Ordenar los registros por columna
     @GetMapping(value = "/get/orderBy/{column}")
     public ResponseEntity<List<PcClientDataEntity>> getOrderByColumn(
         @PathVariable String column
@@ -54,6 +57,7 @@ public class PcClientDataController {
         );
     }
 
+    // Request Body - Obtener registros segun busqueda
     @GetMapping(value = "/get/search/data")
     public ResponseEntity<List<PcClientDataEntity>> getSearchData(
         @RequestBody Map<String, String> searchData
@@ -66,6 +70,7 @@ public class PcClientDataController {
         );
     }
 
+    // Obtener registros con fecha de creacion actual
     @GetMapping(value = "/get/at/date/cr")
     public ResponseEntity<List<PcClientDataEntity>> getAtDateCreate() {
         return ResponseEntity.ok(
@@ -73,6 +78,7 @@ public class PcClientDataController {
         );
     }
 
+    // Obtener registros con fecha de actualizacion actual
     @GetMapping(value = "/get/at/date/up")
     public ResponseEntity<List<PcClientDataEntity>> getAtDateUpdate() {
         return ResponseEntity.ok(
@@ -80,6 +86,7 @@ public class PcClientDataController {
         );
     }
 
+    // Obtener todos los registros con paginacion
     @GetMapping(value = "/page/all")
     public ResponseEntity<Page<PcClientDataEntity>> pageAll(
         @RequestParam(defaultValue = "0") int page,
@@ -90,6 +97,7 @@ public class PcClientDataController {
         );
     }
 
+    // Obtener todos los registros con paginacion y ordenacion
     @GetMapping(value = "/page/sort")
     public ResponseEntity<Page<PcClientDataEntity>> pageSortCol(
         @RequestParam(defaultValue = "0") int page,
@@ -104,6 +112,7 @@ public class PcClientDataController {
         );
     }
 
+    // Path Variable - Obtener un registro especifico
     @GetMapping(value = "/nat/idRegister/{idRegister}")
     public ResponseEntity<List<PcClientDataEntity>> natIdRegister(
         @PathVariable String idRegister
@@ -113,8 +122,9 @@ public class PcClientDataController {
         );
     }
 
+    // Path Variable - Obtener un registro especifico
     @GetMapping(value = "/query/cdIdentification/{cdIdentification}")
-    public ResponseEntity<PcClientDataEntity> queryCdIdentification(
+    public ResponseEntity<List<PcClientDataEntity>> queryCdIdentification(
         @PathVariable String cdIdentification
     ) {
         return ResponseEntity.ok(
@@ -122,8 +132,9 @@ public class PcClientDataController {
         );
     }
 
+    // Path Variable - Obtener un registro especifico
     @GetMapping(value = "/query/cdNames/{cdNames}")
-    public ResponseEntity<PcClientDataEntity> queryCdNames(
+    public ResponseEntity<List<PcClientDataEntity>> queryCdNames(
         @PathVariable String cdNames
     ) {
         return ResponseEntity.ok(
@@ -131,8 +142,9 @@ public class PcClientDataController {
         );
     }
 
+    // Path Variable - Obtener un registro especifico
     @GetMapping(value = "/query/cdSurnames/{cdSurnames}")
-    public ResponseEntity<PcClientDataEntity> queryCdSurnames(
+    public ResponseEntity<List<PcClientDataEntity>> queryCdSurnames(
         @PathVariable String cdSurnames
     ) {
         return ResponseEntity.ok(
@@ -140,6 +152,7 @@ public class PcClientDataController {
         );
     }
 
+    // Request Body - Almacenar varios registros
     @PostMapping(value = "/insert/multi")
     public ResponseEntity<List<PcClientDataEntity>> saveMulti(
         @RequestBody List<PcClientDataEntity> pcClientDataEntities
@@ -160,6 +173,7 @@ public class PcClientDataController {
         return ResponseEntity.ok(savedEntities);
     }
 
+    // Request Body - Almacenar un registro
     @PostMapping(value = "/insert/register")
     public ResponseEntity<PcClientDataEntity> insertRegister(
         @RequestBody PcClientDataEntity pcClientDataEntity
@@ -180,6 +194,7 @@ public class PcClientDataController {
         return ResponseEntity.badRequest().build();
     }
 
+    // Request Body - Actualizar un registro
     @PutMapping(value = "/update/register")
     public ResponseEntity<PcClientDataEntity> updateRegister(
         @RequestBody PcClientDataEntity pcClientDataEntity
@@ -200,6 +215,7 @@ public class PcClientDataController {
         return ResponseEntity.badRequest().build();
     }
 
+    // Request Body - Actualizar un registro
     @PutMapping(value = "/update/dto")
     public ResponseEntity<Void> updateDto(
         @RequestBody PcClientDataDto pcClientDataDto

@@ -18,8 +18,8 @@ public class PcClientPhoneEntity extends AuditoryEntity implements Serializable 
     @Column(name = "id_register", nullable = false)
     private Integer idRegister;
 
-    @Column(name = "cd_phone", nullable = false, unique = false, length = 255)
-    private String cdPhone;
+    @Column(name = "cd_data", nullable = false, unique = false, length = 255)
+    private String cdData;
 
     //@ManyToOne(fecth = FetchType.LAZY)
     @ManyToOne(fetch = FetchType.EAGER)
@@ -38,7 +38,7 @@ public class PcClientPhoneEntity extends AuditoryEntity implements Serializable 
     public String toString() {
         return "PcClientPhoneEntity{" +
             "idRegister=" + idRegister +
-            ", cdPhone='" + cdPhone + '\'' +
+            ", cdData='" + cdData + '\'' +
             ", pcClientData=" + pcClientData +
             '}';
     }

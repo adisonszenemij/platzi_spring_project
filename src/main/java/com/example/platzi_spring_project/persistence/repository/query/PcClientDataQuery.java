@@ -1,5 +1,7 @@
 package com.example.platzi_spring_project.persistence.repository.query;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -13,7 +15,7 @@ public interface PcClientDataQuery extends ListCrudRepository<PcClientDataEntity
         value = "SELECT trd FROM PcClientDataEntity trd" + " " +
             "WHERE trd.cdAddress = :cd_address"
     )
-    PcClientDataEntity findByCdAddress(@Param("cd_address") String cdAddress);
+    List<PcClientDataEntity> findByCdAddress(@Param("cd_address") String cdAddress);
     
     // Obtener resultados buscando por la columna cdIdentification
     @Query(
@@ -21,7 +23,7 @@ public interface PcClientDataQuery extends ListCrudRepository<PcClientDataEntity
         value = "SELECT trd FROM PcClientDataEntity trd" + " " +
             "WHERE trd.cdIdentification = :cd_identification"
     )
-    PcClientDataEntity findByCdIdentification(@Param("cd_identification") String cdIdentification);
+    List<PcClientDataEntity> findByCdIdentification(@Param("cd_identification") String cdIdentification);
     
     // Obtener resultados buscando por la columna cdNames
     @Query(
@@ -29,7 +31,7 @@ public interface PcClientDataQuery extends ListCrudRepository<PcClientDataEntity
         value = "SELECT trd FROM PcClientDataEntity trd" + " " +
             "WHERE trd.cdNames = :cd_names"
     )
-    PcClientDataEntity findByCdNames(@Param("cd_names") String cdNames);
+    List<PcClientDataEntity> findByCdNames(@Param("cd_names") String cdNames);
     
     // Obtener resultados buscando por la columna cdSurnames
     @Query(
@@ -37,5 +39,5 @@ public interface PcClientDataQuery extends ListCrudRepository<PcClientDataEntity
         value = "SELECT trd FROM PcClientDataEntity trd" + " " +
             "WHERE trd.cdSurnames = :cd_surnames"
     )
-    PcClientDataEntity findByCdSurnames(@Param("cd_surnames") String cdSurnames);
+    List<PcClientDataEntity> findByCdSurnames(@Param("cd_surnames") String cdSurnames);
 }

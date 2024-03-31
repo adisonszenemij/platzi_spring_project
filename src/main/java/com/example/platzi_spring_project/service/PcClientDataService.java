@@ -113,15 +113,15 @@ public class PcClientDataService {
         return this.pcClientDataConjunct.findIdRegister(idRegister);
     }
 
-    public PcClientDataEntity queryCdIdentification(String cdIdentification) {
+    public List<PcClientDataEntity> queryCdIdentification(String cdIdentification) {
         return this.pcClientDataQuery.findByCdIdentification(cdIdentification);
     }
 
-    public PcClientDataEntity queryCdNames(String cdNames) {
+    public List<PcClientDataEntity> queryCdNames(String cdNames) {
         return this.pcClientDataQuery.findByCdNames(cdNames);
     }
 
-    public PcClientDataEntity queryCdSurnames(String cdSurnames) {
+    public List<PcClientDataEntity> queryCdSurnames(String cdSurnames) {
         return this.pcClientDataQuery.findByCdSurnames(cdSurnames);
     }
 
