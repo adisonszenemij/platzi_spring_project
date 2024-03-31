@@ -23,13 +23,13 @@ private final JdbcTemplate jdbcTemplate;
     public void loadSqlFiles() {
         try {
             ClassPathResource[] resources = {
-                new ClassPathResource("sql/delete/pc_client_data.sql"),
-                new ClassPathResource("sql/delete/pc_client_email.sql"),
                 new ClassPathResource("sql/delete/pc_client_phone.sql"),
+                new ClassPathResource("sql/delete/pc_client_email.sql"),
+                new ClassPathResource("sql/delete/pc_client_data.sql"),
                 
-                new ClassPathResource("sql/alter/pc_client_data.sql"),
-                new ClassPathResource("sql/alter/pc_client_email.sql"),
                 new ClassPathResource("sql/alter/pc_client_phone.sql"),
+                new ClassPathResource("sql/alter/pc_client_email.sql"),
+                new ClassPathResource("sql/alter/pc_client_data.sql"),
 
                 new ClassPathResource("sql/insert/pc_client_data.sql"),
                 new ClassPathResource("sql/insert/pc_client_email.sql"),
