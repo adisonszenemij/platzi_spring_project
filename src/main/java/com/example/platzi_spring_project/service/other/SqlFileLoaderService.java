@@ -23,14 +23,23 @@ private final JdbcTemplate jdbcTemplate;
     public void loadSqlFiles() {
         try {
             ClassPathResource[] resources = {
+                // Ejecutar eliminaciones en orden descendente
                 new ClassPathResource("sql/delete/pc_client_phone.sql"),
                 new ClassPathResource("sql/delete/pc_client_email.sql"),
                 new ClassPathResource("sql/delete/pc_client_data.sql"),
+                new ClassPathResource("sql/delete/tg_user_data.sql"),
+                new ClassPathResource("sql/delete/tg_role_data.sql"),
                 
+                // Ejecutar alteraciones en orden descendente
                 new ClassPathResource("sql/alter/pc_client_phone.sql"),
                 new ClassPathResource("sql/alter/pc_client_email.sql"),
                 new ClassPathResource("sql/alter/pc_client_data.sql"),
+                new ClassPathResource("sql/alter/tg_user_data.sql"),
+                new ClassPathResource("sql/alter/tg_role_data.sql"),
 
+                // Ejecutar inserciones en orden ascendente
+                new ClassPathResource("sql/insert/tg_role_data.sql"),
+                new ClassPathResource("sql/insert/tg_user_data.sql"),
                 new ClassPathResource("sql/insert/pc_client_data.sql"),
                 new ClassPathResource("sql/insert/pc_client_email.sql"),
                 new ClassPathResource("sql/insert/pc_client_phone.sql"),
