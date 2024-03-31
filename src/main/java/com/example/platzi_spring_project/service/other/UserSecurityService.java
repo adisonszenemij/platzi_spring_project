@@ -23,9 +23,8 @@ public class UserSecurityService implements UserDetailsService {
     public UserDetails loadUserByUsername(String cdLogin) throws UsernameNotFoundException {
         TgUserDataEntity entityTgUserData = this.tgUserDataRepository.findFirstByCdLogin(cdLogin);
         if (entityTgUserData == null) { throw new UsernameNotFoundException("User " + cdLogin + " not found."); }
-
+        
         Integer idRegister = entityTgUserData.getIdRegister();
-
         TgUserDataEntity tgUserDataEntity = this.tgUserDataRepository.findById(idRegister).orElseThrow(
             () -> new UsernameNotFoundException("User " + cdLogin + " not found.")
         );
