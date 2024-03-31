@@ -83,23 +83,23 @@ public class PcClientDataController {
     @GetMapping(value = "/page/all")
     public ResponseEntity<Page<PcClientDataEntity>> pageAll(
         @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "10") int elements
+        @RequestParam(defaultValue = "10") int rows
     ) {
         return ResponseEntity.ok(
-            this.pcClientDataService.pageAll(page, elements)
+            this.pcClientDataService.pageAll(page, rows)
         );
     }
 
     @GetMapping(value = "/page/sort")
     public ResponseEntity<Page<PcClientDataEntity>> pageSortCol(
         @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "10") int elements,
+        @RequestParam(defaultValue = "10") int rows,
         @RequestParam(defaultValue = "idRegister") String sortBy,
         @RequestParam(defaultValue = "ASC") String sortDir
     ) {
         return ResponseEntity.ok(
             this.pcClientDataService.pageSortCol(
-                page, elements, sortBy, sortDir
+                page, rows, sortBy, sortDir
             )
         );
     }
@@ -140,7 +140,7 @@ public class PcClientDataController {
         );
     }
 
-    @PostMapping(value = "/post/save/multi")
+    @PostMapping(value = "/insert/multi")
     public ResponseEntity<List<PcClientDataEntity>> saveMulti(
         @RequestBody List<PcClientDataEntity> pcClientDataEntities
     ) {
@@ -215,12 +215,14 @@ public class PcClientDataController {
         return ResponseEntity.badRequest().build();
     }
 
+    // Eliminar todos los registros
     @DeleteMapping(value = "/delete/all")
     public ResponseEntity<Void> deleteAll() {
         this.pcClientDataService.deleteAll();
         return ResponseEntity.ok().build();
     }
 
+    // Eliminar un registros especifico
     @DeleteMapping(value = "/delete/byId/{idRegister}")
     public ResponseEntity<?> deleteById(@PathVariable int idRegister) {
         Map<String, String> response = new HashMap<>();
@@ -238,15 +240,16 @@ public class PcClientDataController {
         }
     }
 
+    // Eliminar varios registros especificos
     @DeleteMapping(value = "/delete/byIdAll/{ids}")
     public ResponseEntity<Void> deleteByIdAll(@PathVariable List<Integer> ids) {
         for (Integer id : ids) {
-            if (!this.pcClientDataService.existsById(id)) {
-                return ResponseEntity.badRequest().build();
+            if (this.pcClientDataService.existsById(id)) {
+                this.pcClientDataService.deleteByIdAll(ids);
+                return ResponseEntity.ok().build();
             }
         }
 
-        this.pcClientDataService.deleteByIdAll(ids);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.badRequest().build();
     }
 }
