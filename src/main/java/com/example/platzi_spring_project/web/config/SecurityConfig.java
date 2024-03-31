@@ -27,7 +27,9 @@ public class SecurityConfig {
             permitAll: Permitir todas las peticiones
             authenticated: Debe estar autenticado
             httpBasic: Autenticado con http basic
+        */
 
+        /*
             Permitir unicamente el primer nivel: /api/test
             requestMatchers(HttpMethod.GET, "/api/*").permitAll()
 
@@ -37,23 +39,30 @@ public class SecurityConfig {
             Proteger unicamente bajo el prefijo indicado
             requestMatchers(HttpMethod.GET, "/api/test/**").permitAll()
 
-            Denegacion total de consumo para metodos especificos
             GET - POST - PUT - DELETE - ETC
+            Denegacion total de consumo para metodos especificos
             .requestMatchers(HttpMethod.METHOD).denyAll()
-        */
 
-        /*httpSecurity
-            .csrf().disable()
-            .cors().and()
-            .authorizeHttpRequests()
-            .anyRequest()
-            .permitAll();*/
+            GET - POST - PUT - DELETE - ETC
+            hasAnyRole: Permitir acceso a los diferentes metodos segun varios roles
+            .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN", "CUSTOMER")
+
+            GET - POST - PUT - DELETE - ETC
+            hasRole: Permitir acceso a los diferentes metodos segun un rol especificado
+            .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN", "CUSTOMER")
+
+            hasRole: Permitir acceso a todos los metodos segun un rol especificado
+            .requestMatchers("/api/**").hasRole("ADMIN")
+        */
         
         httpSecurity
             .csrf().disable()
             .cors().and()
             .authorizeHttpRequests()
-            .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+            //.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN", "CUSTOMER")
+            .requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN")
+            .requestMatchers("/api/**").hasRole("ADMIN")
             //.requestMatchers(HttpMethod.PUT).denyAll()
             .anyRequest()
             .authenticated().and()
@@ -69,7 +78,14 @@ public class SecurityConfig {
             .password(passwordEncoder().encode("root"))
             .roles("ADMIN")
             .build();
-        return new InMemoryUserDetailsManager(root);
+
+        UserDetails customer = User.builder()
+                .username("customer")
+                .password(passwordEncoder().encode("customer"))
+                .roles("CUSTOMER")
+                .build();
+
+        return new InMemoryUserDetailsManager(root, customer);
     }
 
     @Bean
