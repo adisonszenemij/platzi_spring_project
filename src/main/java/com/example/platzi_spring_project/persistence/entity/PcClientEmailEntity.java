@@ -21,6 +21,7 @@ public class PcClientEmailEntity extends AuditoryEntity implements Serializable 
     @Column(name = "cd_data", nullable = false, unique = false, length = 255)
     private String cdData;
 
+    // Many: PcClientEmail - One: PcClientData
     //@ManyToOne(fecth = FetchType.LAZY)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(
