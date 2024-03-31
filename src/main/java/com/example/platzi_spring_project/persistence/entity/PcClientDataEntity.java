@@ -1,7 +1,14 @@
 package com.example.platzi_spring_project.persistence.entity;
 
+import java.io.Serializable;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.example.platzi_spring_project.persistence.audit.PcClientDataListener;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,10 +19,11 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "pc_client_data")
+@EntityListeners({AuditingEntityListener.class, PcClientDataListener.class})
 @Getter
 @Setter
 @NoArgsConstructor
-public class PcClientDataEntity {
+public class PcClientDataEntity extends AuditoryEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_register", nullable = false)
