@@ -28,6 +28,7 @@ private final JdbcTemplate jdbcTemplate;
                 new ClassPathResource("sql/delete/pc_client_email.sql"),
                 new ClassPathResource("sql/delete/pc_client_data.sql"),
                 new ClassPathResource("sql/delete/tg_user_data.sql"),
+                new ClassPathResource("sql/delete/tg_role_state.sql"),
                 new ClassPathResource("sql/delete/tg_role_data.sql"),
                 
                 // Ejecutar alteraciones en orden descendente
@@ -35,10 +36,12 @@ private final JdbcTemplate jdbcTemplate;
                 new ClassPathResource("sql/alter/pc_client_email.sql"),
                 new ClassPathResource("sql/alter/pc_client_data.sql"),
                 new ClassPathResource("sql/alter/tg_user_data.sql"),
+                new ClassPathResource("sql/alter/tg_user_state.sql"),
                 new ClassPathResource("sql/alter/tg_role_data.sql"),
 
                 // Ejecutar inserciones en orden ascendente
                 new ClassPathResource("sql/insert/tg_role_data.sql"),
+                new ClassPathResource("sql/insert/tg_user_state.sql"),
                 new ClassPathResource("sql/insert/tg_user_data.sql"),
                 new ClassPathResource("sql/insert/pc_client_data.sql"),
                 new ClassPathResource("sql/insert/pc_client_email.sql"),
