@@ -18,7 +18,7 @@ public class PcClientEmailEntity extends AuditoryEntity implements Serializable 
     @Column(name = "id_register", nullable = false)
     private Integer idRegister;
 
-    @Column(name = "cd_data", nullable = false, unique = false, length = 255)
+    @Column(name = "cd_data", nullable = false, unique = true, length = 255)
     private String cdData;
 
     // Many: PcClientEmail - One: PcClientData
