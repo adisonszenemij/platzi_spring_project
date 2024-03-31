@@ -28,7 +28,7 @@ private final JdbcTemplate jdbcTemplate;
                 new ClassPathResource("sql/delete/pc_client_email.sql"),
                 new ClassPathResource("sql/delete/pc_client_data.sql"),
                 new ClassPathResource("sql/delete/tg_user_data.sql"),
-                new ClassPathResource("sql/delete/tg_role_state.sql"),
+                new ClassPathResource("sql/delete/tg_user_state.sql"),
                 new ClassPathResource("sql/delete/tg_role_data.sql"),
                 
                 // Ejecutar alteraciones en orden descendente
