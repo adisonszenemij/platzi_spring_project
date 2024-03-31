@@ -40,4 +40,15 @@ public class PcClientDataEntity extends AuditoryEntity implements Serializable {
 
     @Column(name = "cd_surnames", nullable = false, unique = false, length = 255)
     private String cdSurnames;
+
+    @Override
+    public String toString() {
+        return "PcClientDataEntity{" +
+            "idRegister=" + idRegister +
+            ", cdAddress='" + cdAddress + '\'' +
+            ", cdIdentification='" + cdIdentification + '\'' +
+            ", cdNames='" + cdNames + '\'' +
+            ", cdSurnames='" + cdSurnames + '\'' +
+            '}';
+    }
 }
