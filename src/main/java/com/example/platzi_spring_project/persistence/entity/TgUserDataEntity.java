@@ -1,5 +1,7 @@
 package com.example.platzi_spring_project.persistence.entity;
 
+import java.io.Serializable;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class TgUserDataEntity {
+public class TgUserDataEntity extends AuditoryEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_register", nullable = false)
