@@ -11,20 +11,24 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         // Iniciar configuracion de seguridad
 
+        // crsf: Deshabilitar protección CSRF
         // authorizeHttpRequests: Autorizar peticiones http
         // anyRequest: Cualquier peticion
         // permitAll: Permitir todas las peticiones
         /*httpSecurity
+            .csrf().disable()
             .authorizeHttpRequests()
             .anyRequest()
             .permitAll();*/
 
+        // crsf: Deshabilitar protección CSRF
         // authorizeHttpRequests: Autorizar peticiones http
         // anyRequest: Cualquier peticion
         // authenticated: Debe estar autenticado
         // and: Conector Union
         // httpBasic: Autenticado con http basic
         httpSecurity
+            .csrf().disable()
             .authorizeHttpRequests()
             .anyRequest()
             .authenticated()
