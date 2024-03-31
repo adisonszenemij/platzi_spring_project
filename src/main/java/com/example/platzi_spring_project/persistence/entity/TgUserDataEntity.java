@@ -24,4 +24,18 @@ public class TgUserDataEntity {
 
     @Column(name = "cd_password", nullable = false, unique = false, length = 255)
     private String cdPassword;
+
+    // Many: TgUserData - One: TgRoleData
+    //@ManyToOne(fecth = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(
+        name = "tg_role_data",
+        referencedColumnName = "id_register",
+        insertable = false,
+        updatable = false
+    )
+    //@JsonIgnore
+    @OrderBy("id_register ASC")
+    //@OrderBy("id_register DESC")
+    private TgRoleDataEntity tgRoleData;
 }
