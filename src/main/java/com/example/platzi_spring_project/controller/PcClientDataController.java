@@ -66,14 +66,14 @@ public class PcClientDataController {
         );
     }
 
-    @GetMapping(value = "/get/at/date/create")
+    @GetMapping(value = "/get/at/date/cr")
     public ResponseEntity<List<PcClientDataEntity>> getAtDateCreate() {
         return ResponseEntity.ok(
             this.pcClientDataService.getAtDateCreate()
         );
     }
 
-    @GetMapping(value = "/get/at/date/update")
+    @GetMapping(value = "/get/at/date/up")
     public ResponseEntity<List<PcClientDataEntity>> getAtDateUpdate() {
         return ResponseEntity.ok(
             this.pcClientDataService.getAtDateUpdate()
