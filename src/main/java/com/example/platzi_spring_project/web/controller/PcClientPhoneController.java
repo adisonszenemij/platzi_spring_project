@@ -1,4 +1,4 @@
-package com.example.platzi_spring_project.controller;
+package com.example.platzi_spring_project.web.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,94 +19,94 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.platzi_spring_project.persistence.entity.PcClientEmailEntity;
-import com.example.platzi_spring_project.service.PcClientEmailService;
-import com.example.platzi_spring_project.service.dto.PcClientEmailDto;
+import com.example.platzi_spring_project.persistence.entity.PcClientPhoneEntity;
+import com.example.platzi_spring_project.service.PcClientPhoneService;
+import com.example.platzi_spring_project.service.dto.PcClientPhoneDto;
 
 @RestController
-@RequestMapping(value = "/api/pcClientEmail")
-public class PcClientEmailController {
-    private final PcClientEmailService pcClientEmailService;
+@RequestMapping(value = "/api/pcClientPhone")
+public class PcClientPhoneController {
+    private final PcClientPhoneService pcClientPhoneService;
 
     @Autowired
-    public PcClientEmailController(
-        PcClientEmailService pcClientEmailService
+    public PcClientPhoneController(
+        PcClientPhoneService pcClientPhoneService
     ) {
-        this.pcClientEmailService = pcClientEmailService;
+        this.pcClientPhoneService = pcClientPhoneService;
     }
 
     // Obtener todos los registros
     @GetMapping(value = "/get/all")
-    public ResponseEntity<List<PcClientEmailEntity>> getAll() {
-        return ResponseEntity.ok(this.pcClientEmailService.getAll());
+    public ResponseEntity<List<PcClientPhoneEntity>> getAll() {
+        return ResponseEntity.ok(this.pcClientPhoneService.getAll());
     }
 
     // Path Variable - Obtener un registro especifico
     @GetMapping(value = "/get/byId/{idRegister}")
-    public ResponseEntity<PcClientEmailEntity> getById(@PathVariable int idRegister) {
-        return ResponseEntity.ok(this.pcClientEmailService.getById(idRegister));
+    public ResponseEntity<PcClientPhoneEntity> getById(@PathVariable int idRegister) {
+        return ResponseEntity.ok(this.pcClientPhoneService.getById(idRegister));
     }
 
     // Path Varabile - Ordenar los registros por columna
     @GetMapping(value = "/get/orderBy/{column}")
-    public ResponseEntity<List<PcClientEmailEntity>> getOrderByColumn(
+    public ResponseEntity<List<PcClientPhoneEntity>> getOrderByColumn(
         @PathVariable String column
     ) {
         return ResponseEntity.ok(
-            this.pcClientEmailService.getOrderByColumn(column)
+            this.pcClientPhoneService.getOrderByColumn(column)
         );
     }
 
     // Request Body - Obtener registros segun busqueda
     @GetMapping(value = "/get/search/data")
-    public ResponseEntity<List<PcClientEmailEntity>> getSearchData(
+    public ResponseEntity<List<PcClientPhoneEntity>> getSearchData(
         @RequestBody Map<String, String> searchData
     ) {
         String columnName = searchData.keySet().iterator().next();
         String columnValue = searchData.get(columnName);
 
         return ResponseEntity.ok(
-            this.pcClientEmailService.getSearchData(columnName, columnValue)
+            this.pcClientPhoneService.getSearchData(columnName, columnValue)
         );
     }
 
     // Obtener registros con fecha de creacion actual
     @GetMapping(value = "/get/at/date/cr")
-    public ResponseEntity<List<PcClientEmailEntity>> getAtDateCreate() {
+    public ResponseEntity<List<PcClientPhoneEntity>> getAtDateCreate() {
         return ResponseEntity.ok(
-            this.pcClientEmailService.getAtDateCreate()
+            this.pcClientPhoneService.getAtDateCreate()
         );
     }
 
     // Obtener registros con fecha de actualizacion actual
     @GetMapping(value = "/get/at/date/up")
-    public ResponseEntity<List<PcClientEmailEntity>> getAtDateUpdate() {
+    public ResponseEntity<List<PcClientPhoneEntity>> getAtDateUpdate() {
         return ResponseEntity.ok(
-            this.pcClientEmailService.getAtDateUpdate()
+            this.pcClientPhoneService.getAtDateUpdate()
         );
     }
 
     // Obtener todos los registros con paginacion
     @GetMapping(value = "/page/all")
-    public ResponseEntity<Page<PcClientEmailEntity>> pageAll(
+    public ResponseEntity<Page<PcClientPhoneEntity>> pageAll(
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "10") int rows
     ) {
         return ResponseEntity.ok(
-            this.pcClientEmailService.pageAll(page, rows)
+            this.pcClientPhoneService.pageAll(page, rows)
         );
     }
 
     // Obtener todos los registros con paginacion y ordenacion
     @GetMapping(value = "/page/sort")
-    public ResponseEntity<Page<PcClientEmailEntity>> pageSortCol(
+    public ResponseEntity<Page<PcClientPhoneEntity>> pageSortCol(
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "10") int rows,
         @RequestParam(defaultValue = "idRegister") String sortBy,
         @RequestParam(defaultValue = "ASC") String sortDir
     ) {
         return ResponseEntity.ok(
-            this.pcClientEmailService.pageSortCol(
+            this.pcClientPhoneService.pageSortCol(
                 page, rows, sortBy, sortDir
             )
         );
@@ -114,37 +114,37 @@ public class PcClientEmailController {
 
     // Path Variable - Obtener un registro especifico
     @GetMapping(value = "/nat/idRegister/{idRegister}")
-    public ResponseEntity<List<PcClientEmailEntity>> natIdRegister(
+    public ResponseEntity<List<PcClientPhoneEntity>> natIdRegister(
         @PathVariable String idRegister
     ) {
         return ResponseEntity.ok(
-            this.pcClientEmailService.natIdRegister(idRegister)
+            this.pcClientPhoneService.natIdRegister(idRegister)
         );
     }
 
     // Path Variable - Obtener un registro especifico
     @GetMapping(value = "/query/cdData/{cdData}")
-    public ResponseEntity<List<PcClientEmailEntity>> queryCdData(
+    public ResponseEntity<List<PcClientPhoneEntity>> queryCdData(
         @PathVariable String cdData
     ) {
         return ResponseEntity.ok(
-            this.pcClientEmailService.queryCdData(cdData)
+            this.pcClientPhoneService.queryCdData(cdData)
         );
     }
 
     // Request Body - Almacenar varios registros
     @PostMapping(value = "/insert/multi")
-    public ResponseEntity<List<PcClientEmailEntity>> saveMulti(
-        @RequestBody List<PcClientEmailEntity> pcClientDataEntities
+    public ResponseEntity<List<PcClientPhoneEntity>> saveMulti(
+        @RequestBody List<PcClientPhoneEntity> pcClientDataEntities
     ) {
-        List<PcClientEmailEntity> savedEntities = new ArrayList<>();
-        for (PcClientEmailEntity entity : pcClientDataEntities) {
+        List<PcClientPhoneEntity> savedEntities = new ArrayList<>();
+        for (PcClientPhoneEntity entity : pcClientDataEntities) {
             if (entity.getIdRegister() == null ||
-                !this.pcClientEmailService.existsById(
+                !this.pcClientPhoneService.existsById(
                     entity.getIdRegister()
                 )
             ) {
-                savedEntities.add(this.pcClientEmailService.save(entity));
+                savedEntities.add(this.pcClientPhoneService.save(entity));
             } else {
                 return ResponseEntity.badRequest().build();
             }
@@ -155,17 +155,17 @@ public class PcClientEmailController {
 
     // Request Body - Almacenar un registro
     @PostMapping(value = "/insert/register")
-    public ResponseEntity<PcClientEmailEntity> insertRegister(
-        @RequestBody PcClientEmailEntity pcClientDataEntity
+    public ResponseEntity<PcClientPhoneEntity> insertRegister(
+        @RequestBody PcClientPhoneEntity pcClientDataEntity
     ) {
         // Si el id del registro es nulo o si el registro no existe
         if (pcClientDataEntity.getIdRegister() == null ||
-            !this.pcClientEmailService.existsById(
+            !this.pcClientPhoneService.existsById(
                 pcClientDataEntity.getIdRegister()
             )
         ) {
             return ResponseEntity.ok(
-                this.pcClientEmailService.save(
+                this.pcClientPhoneService.save(
                     pcClientDataEntity
                 )
             );
@@ -176,17 +176,17 @@ public class PcClientEmailController {
 
     // Request Body - Actualizar un registro
     @PutMapping(value = "/update/register")
-    public ResponseEntity<PcClientEmailEntity> updateRegister(
-        @RequestBody PcClientEmailEntity pcClientDataEntity
+    public ResponseEntity<PcClientPhoneEntity> updateRegister(
+        @RequestBody PcClientPhoneEntity pcClientDataEntity
     ) {
         // Si el id del registro no es nulo o si el registro existe
         if (pcClientDataEntity.getIdRegister() != null &&
-            this.pcClientEmailService.existsById(
+            this.pcClientPhoneService.existsById(
                 pcClientDataEntity.getIdRegister()
             )
         ) {
             return ResponseEntity.ok(
-                this.pcClientEmailService.save(
+                this.pcClientPhoneService.save(
                     pcClientDataEntity
                 )
             );
@@ -198,13 +198,13 @@ public class PcClientEmailController {
     // Request Body - Actualizar un registro
     @PutMapping(value = "/update/dto")
     public ResponseEntity<Void> updateDto(
-        @RequestBody PcClientEmailDto pcClientDataDto
+        @RequestBody PcClientPhoneDto pcClientDataDto
     ) {
-        if (this.pcClientEmailService.existsById(
+        if (this.pcClientPhoneService.existsById(
                 pcClientDataDto.getIdRegister()
             )
         ) {
-            this.pcClientEmailService.updateDto(pcClientDataDto);
+            this.pcClientPhoneService.updateDto(pcClientDataDto);
             return ResponseEntity.ok().build();
         }
 
@@ -214,7 +214,7 @@ public class PcClientEmailController {
     // Eliminar todos los registros
     @DeleteMapping(value = "/delete/all")
     public ResponseEntity<Void> deleteAll() {
-        this.pcClientEmailService.deleteAll();
+        this.pcClientPhoneService.deleteAll();
         return ResponseEntity.ok().build();
     }
 
@@ -224,8 +224,8 @@ public class PcClientEmailController {
         Map<String, String> response = new HashMap<>();
         try {
             var message = "Registro Inexistente";
-            if (this.pcClientEmailService.existsById(idRegister)) {
-                this.pcClientEmailService.deleteById(idRegister);
+            if (this.pcClientPhoneService.existsById(idRegister)) {
+                this.pcClientPhoneService.deleteById(idRegister);
                 message = "Registro Eliminado";
             }
             response.put("message", message);
@@ -240,8 +240,8 @@ public class PcClientEmailController {
     @DeleteMapping(value = "/delete/byIdAll/{ids}")
     public ResponseEntity<Void> deleteByIdAll(@PathVariable List<Integer> ids) {
         for (Integer id : ids) {
-            if (this.pcClientEmailService.existsById(id)) {
-                this.pcClientEmailService.deleteByIdAll(ids);
+            if (this.pcClientPhoneService.existsById(id)) {
+                this.pcClientPhoneService.deleteByIdAll(ids);
                 return ResponseEntity.ok().build();
             }
         }
