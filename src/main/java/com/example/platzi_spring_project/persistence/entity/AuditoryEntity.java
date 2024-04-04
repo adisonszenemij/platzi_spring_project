@@ -2,7 +2,9 @@ package com.example.platzi_spring_project.persistence.entity;
 
 import java.time.LocalDateTime;
 
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Column;
@@ -20,4 +22,12 @@ public class AuditoryEntity {
 
     @Column(name = "cd_description", nullable = true, length = 255, unique = false)
     private String cdDescription;
+
+    @Column(name = "at_created_by", nullable = true, length = 255, unique = false)
+    @CreatedBy
+    private String atCreatedBy;
+
+    @Column(name = "at_modified_by", nullable = true, length = 255, unique = false)
+    @LastModifiedBy
+    private String atModifiedBy;
 }

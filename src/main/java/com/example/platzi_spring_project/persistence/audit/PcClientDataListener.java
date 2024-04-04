@@ -2,6 +2,7 @@ package com.example.platzi_spring_project.persistence.audit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.SerializationUtils;
 
 import com.example.platzi_spring_project.persistence.entity.PcClientDataEntity;
 
@@ -14,7 +15,7 @@ public class PcClientDataListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(PcClientDataEntity.class);
     private PcClientDataEntity currentValue;
 
-    @PostLoad
+    /*@PostLoad
     public void postLoad(PcClientDataEntity pcClientDataEntity) {
         if (LOGGER.isInfoEnabled()) { LOGGER.info("POST LOAD"); }
         this.currentValue = cloneEntity(pcClientDataEntity);
@@ -45,5 +46,24 @@ public class PcClientDataListener {
         clone.setCdNames(entity.getCdNames());
         clone.setCdSurnames(entity.getCdSurnames());
         return clone;
+    }*/
+
+    @PostLoad
+    public void postLoad(PcClientDataEntity entity) {
+        System.out.println("POST LOAD");
+        this.currentValue = SerializationUtils.clone(entity);
+    }
+
+    @PostPersist
+    @PostUpdate
+    public void onPostPersist(PcClientDataEntity entity) {
+        System.out.println("POST PERSIST OR UPDATE");
+        System.out.println("OLD VALUE: " + this.currentValue);
+        System.out.println("NEW VALUE: " + entity.toString());
+    }
+
+    @PreRemove
+    public void onPreDelete(PcClientDataEntity entity) {
+        System.out.println(entity.toString());
     }
 }
