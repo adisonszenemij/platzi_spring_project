@@ -3,6 +3,8 @@ package com.example.platzi_spring_project.web.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -61,7 +63,7 @@ public class SecurityConfig {
             .csrf().disable()
             .cors().and()
             .authorizeHttpRequests()
-            
+            .requestMatchers("/api/auth/**").permitAll()
             //.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
             //.requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN", "CUSTOMER")
             .requestMatchers(HttpMethod.GET, "/api/pcClientData/**").hasAnyRole("ADMIN", "CUSTOMER")
@@ -93,6 +95,13 @@ public class SecurityConfig {
 
         return new InMemoryUserDetailsManager(root, customer);
     }*/
+
+    @Bean
+    public AuthenticationManager authenticationManager(
+        AuthenticationConfiguration authenticationConfiguration
+    ) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
