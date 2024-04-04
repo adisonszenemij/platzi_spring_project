@@ -7,17 +7,24 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+
+import com.example.platzi_spring_project.util.other.JwtFilter;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
+    private final JwtFilter jwtFilter;
+
+    public SecurityConfig(JwtFilter jwtFilter) {
+        this.jwtFilter = jwtFilter;
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         // Iniciar configuracion de seguridad
@@ -62,6 +69,7 @@ public class SecurityConfig {
         httpSecurity
             .csrf().disable()
             .cors().and()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeHttpRequests()
             .requestMatchers("/api/auth/**").permitAll()
             //.requestMatchers(HttpMethod.GET, "/api/**").permitAll()
@@ -71,10 +79,11 @@ public class SecurityConfig {
             .requestMatchers("/api/pcClientData/get/all").hasAnyAuthority("random_order")
             //.requestMatchers("/api/**").hasRole("ADMIN")
             //.requestMatchers(HttpMethod.PUT).denyAll()
-            
             .anyRequest()
             .authenticated().and()
-            .httpBasic();
+            //.httpBasic();
+            //.addFilterBefore(jwtFilter, BasicAuthenticationFilter.class);
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         
         return httpSecurity.build();
     }
